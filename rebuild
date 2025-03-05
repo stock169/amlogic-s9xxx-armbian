@@ -103,8 +103,8 @@ declare -A tags_list
 build_board="all"
 
 # Set Armbian size (Unit: MiB, boot_mb >= 256, root_mb >= 2048)
-boot_mb="2560"
-root_mb="25"
+boot_mb="512"
+root_mb="2560"
 # Set ROOTFS partition file system type, options: [ ext4 / btrfs ]
 rootfs_type="ext4"
 # Set Armbian OS type (server / desktop)
@@ -766,22 +766,22 @@ copy_files() {
     fi
 
     # Copy the full Armbian image
-    cp -af ${tmp_armbian}/* ${tag_bootfs}
+    cp -af ${tmp_armbian}/* ${tag_rootfs}
 
     # Copy the common files
-    [[ -d "${common_files}" ]] && cp -af --no-preserve=ownership ${common_files}/* ${tag_bootfs}
+    [[ -d "${common_files}" ]] && cp -af --no-preserve=ownership ${common_files}/* ${tag_rootfs}
 
     # Copy the platform files
     platform_bootfs="${platform_files}/${PLATFORM}/bootfs"
-    platform_rootfs="${platform_files}/${PLATFORM}/bootfs"
+    platform_rootfs="${platform_files}/${PLATFORM}/rootfs"
     [[ -d "${platform_bootfs}" ]] && cp -rf ${platform_bootfs}/* ${tag_bootfs}
-    [[ -d "${platform_rootfs}" ]] && cp -af --no-preserve=ownership ${platform_rootfs}/* ${tag_bootfs}
+    [[ -d "${platform_rootfs}" ]] && cp -af --no-preserve=ownership ${platform_rootfs}/* ${tag_rootfs}
 
     # Copy the different files
     different_bootfs="${different_files}/${board}/bootfs"
-    different_rootfs="${different_files}/${board}/bootfs"
+    different_rootfs="${different_files}/${board}/rootfs"
     [[ -d "${different_bootfs}" ]] && cp -rf ${different_bootfs}/* ${tag_bootfs}
-    [[ -d "${different_rootfs}" ]] && cp -af --no-preserve=ownership ${different_rootfs}/* ${tag_bootfs}
+    [[ -d "${different_rootfs}" ]] && cp -af --no-preserve=ownership ${different_rootfs}/* ${tag_rootfs}
 
     # Copy the bootloader files
     [[ -d "${tag_rootfs}/usr/lib/u-boot" ]] || mkdir -p ${tag_rootfs}/usr/lib/u-boot
