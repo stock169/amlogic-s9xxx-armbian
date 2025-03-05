@@ -766,22 +766,22 @@ copy_files() {
     fi
 
     # Copy the full Armbian image
-    cp -af ${tmp_armbian}/* ${tag_rootfs}
+    cp -af ${tmp_armbian}/* ${tag_bootfs}
 
     # Copy the common files
-    [[ -d "${common_files}" ]] && cp -af --no-preserve=ownership ${common_files}/* ${tag_rootfs}
+    [[ -d "${common_files}" ]] && cp -af --no-preserve=ownership ${common_files}/* ${tag_bootfs}
 
     # Copy the platform files
     platform_bootfs="${platform_files}/${PLATFORM}/bootfs"
-    platform_rootfs="${platform_files}/${PLATFORM}/rootfs"
+    platform_rootfs="${platform_files}/${PLATFORM}/bootfs"
     [[ -d "${platform_bootfs}" ]] && cp -rf ${platform_bootfs}/* ${tag_bootfs}
-    [[ -d "${platform_rootfs}" ]] && cp -af --no-preserve=ownership ${platform_rootfs}/* ${tag_rootfs}
+    [[ -d "${platform_rootfs}" ]] && cp -af --no-preserve=ownership ${platform_rootfs}/* ${tag_bootfs}
 
     # Copy the different files
     different_bootfs="${different_files}/${board}/bootfs"
-    different_rootfs="${different_files}/${board}/rootfs"
+    different_rootfs="${different_files}/${board}/bootfs"
     [[ -d "${different_bootfs}" ]] && cp -rf ${different_bootfs}/* ${tag_bootfs}
-    [[ -d "${different_rootfs}" ]] && cp -af --no-preserve=ownership ${different_rootfs}/* ${tag_rootfs}
+    [[ -d "${different_rootfs}" ]] && cp -af --no-preserve=ownership ${different_rootfs}/* ${tag_bootfs}
 
     # Copy the bootloader files
     [[ -d "${tag_rootfs}/usr/lib/u-boot" ]] || mkdir -p ${tag_rootfs}/usr/lib/u-boot
