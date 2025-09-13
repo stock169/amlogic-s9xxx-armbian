@@ -181,6 +181,7 @@ on:
           - wocyber-a3
           - wxy-oect
           - wxy-oect-replaced
+          - efused-wxy-oec
           - xiaobao
           - yskj
           - zcube1-max
@@ -198,6 +199,7 @@ on:
           - 6.1.y
           - 6.6.y
           - 6.12.y
+          - 6.1.75_6.1.99_6.1.115
           - 5.4.y_5.10.y
           - 5.15.y_6.1.y
           - 6.1.y_6.12.y
@@ -215,6 +217,7 @@ on:
         type: choice
         options:
           - ophub/kernel
+          - stock169/kernel
       kernel_usage:
         description: "Set the tags of the stable kernel."
         required: false
